@@ -13,7 +13,7 @@ module Spree
         end
 
         def track
-          changed_quantity = changed_quantity(target.previous_changes[:quantity].map(&:to_i))
+          changed_quantity = changed_quantity(target.previous_changes[:quantity].map(&:to_i)) rescue 0
           self.activity = activity(changed_quantity, target)
           self.quantity = changed_quantity
           CartEvent.create(instance_values)
